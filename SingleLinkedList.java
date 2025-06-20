@@ -50,11 +50,43 @@ public class SingleLinkedList
 		}
 		currentnode.nextNode=newnode;
 	}
+	public void deleteFirst() 
+	{
+		if(head==null)
+		{
+			System.out.println("list is empty");
+		}
+		else
+		{
+			head=head.nextNode;
+		}
+	}
+	public void deleteLast()
+	{
+		if(head==null)
+		{
+			System.out.println("list is empty...");
+		}
+		else if(head.nextNode==null)
+		{
+			head=null;
+		}
+		else
+		{
+			Node currentNode=head;
+			while(currentNode.nextNode.nextNode!=null)
+			{
+				currentNode=currentNode.nextNode;
+			}
+			currentNode.nextNode=null;
+		}
+	}
 	public void printList()
 	{
 		if(head==null)
 		{
 			System.out.println("there is no elements present");
+			return;
 		}
 		Node currentNode=head;
 		while(currentNode!=null)
@@ -73,8 +105,15 @@ public class SingleLinkedList
 		list.insertLast("spring");
 		list.insertFirst("dotnet");
 		list.printList();
-		System.out.println(list.head);
+//		System.out.println(list.head);
+		System.out.println("before deletion...");
+		list.deleteFirst();
+		list.deleteFirst();
+		
+		list.printList();
+
 
 	}
+	
 
 }
