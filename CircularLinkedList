@@ -1,0 +1,62 @@
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+class CircularLinkedList {
+    Node head = null;
+    Node tail = null;
+
+    // Insert at beginning
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = tail = newNode;
+            tail.next = head;
+        } else {
+            newNode.next = head;
+            head = newNode;
+            tail.next = head;
+        }
+    }
+
+    // Insert at end
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = tail = newNode;
+            tail.next = head;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+            tail.next = head;
+        }
+    }
+
+    // Display Circular Linked List
+    public void display() {
+        if (head == null) return;
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println();
+    }
+}
+
+public class CircularListMain {
+    public static void main(String[] args) {
+        CircularLinkedList cll = new CircularLinkedList();
+        cll.insertAtEnd(10);
+        cll.insertAtBeginning(5);
+        cll.insertAtEnd(20);
+
+        System.out.println("Circular Linked List:");
+        cll.display();  // Output: 5 10 20
+    }
+}
