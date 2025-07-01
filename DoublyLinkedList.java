@@ -1,73 +1,117 @@
-public class DoublyList {
+package Demo;
 
-    // Node class representing each element of the list
-    class Node {
-        String data;
-        Node prev;
-        Node next;
+import javax.swing.text.Position;
 
-        public Node(String data) {
-            this.data = data;
-            this.prev = null;
-            this.next = null;
-        }
-    }
+public class DoubleLinkedList {
+	class Node{
+		String data;
+		Node prev;
+		Node next;
+		public Node(String data)
+		{
+			this.data=data;
+			this.prev=null;
+			this.next=null;
+			size++;
+		}
+	}
+	private Node head;
+	private Node tail;
+	private int size;
+	public DoubleLinkedList()
+	{
+		this.head=null;
+		this.tail=null;
+	}
+	//insertion node at beging
+	public void insertBeg(String data)
+	{
+		Node newNode=new Node(data);
+		if(head==null)
+		{
+			head=newNode;
+			tail=newNode;
+		}
+		else
+		{
+			newNode.next=head;
+			head.prev=newNode;
+			head=newNode;
+		}
+	}
+	
+	//insertion node at end
+		public void insertEnd(String data)
+		{
+			Node newNode=new Node(data);
+			if(tail==null)
+			{
+				head=newNode;
+				tail=newNode;
+			}
+			else
+			{
+				newNode.prev=tail;
+				tail.next=newNode;
+				tail=newNode;
+			}
+		}
+	public int size()
+	{
+		return size;
+	}
+	
+	public void Forward()
+	{
+		Node current=head;
+		while(current!=null)
+		{
+			System.out.println(current.data);
+			current=current.next;
+		}
+	}
+	public void Reverse()
+	{
+		Node current=tail;
+		while(current!=null)
+		{
+			System.out.println(current.data);
+			current=current.prev;
+		}
+	}
+	public void AtSpecificPosition(int position,String data)
+	{
+		if(position<0||position>size)
+		{
+			System.out.println("Not a valid Position");
+			
+		}
+		Node newNode=new Node(data);
+		if(position==0&&head!=null)
+		{
+			newNode.next=head;
+			head.prev=newNode;
+			head=newNode;
+			
+		}
+		
+		
+	}
 
-    // Head and tail of the list
-    private Node head;
-    private Node tail;
+	public static void main(String[] args) {
+		DoubleLinkedList d1=new DoubleLinkedList();
+		d1.insertBeg("java");
+		d1.insertEnd("css");
+		d1.insertBeg("python");
+		
+		d1.insertEnd(".net");
+		d1.insertBeg("html");
+		d1.Forward();
+		System.out.println("Size of the list when forward:"+d1.size);
+		d1.Reverse();
+		System.out.println("Size of the list when reversed:"+d1.size);
+		
 
-    // Constructor for initializing empty list
-    public DoublyList() {
-        this.head = null;
-        this.tail = null;
-    }
+	}
 
-    // Insert node at the beginning
-    public void insertAtBeg(String data) {
-        Node newNode = new Node(data);
-        if (head == null) {
-            head = tail = newNode;
-        } else {
-            newNode.next = head;
-            head.prev = newNode;
-            head = newNode;
-        }
-    }
-
-    // Insert node at the end
-    public void insertAtEnd(String data) {
-        Node newNode = new Node(data);
-        if (tail == null) {
-            head = tail = newNode;
-        } else {
-            tail.next = newNode;
-            newNode.prev = tail;
-            tail = newNode;
-        }
-    }
-
-    // Print all elements from head to tail
-    public void print() {
-        Node current = head;
-        while (current != null) {
-            System.out.print(current.data + " ");
-            current = current.next;
-        }
-        System.out.println();
-    }
-
-    // Main method for testing
-    public static void main(String[] args) {
-        DoublyList d1 = new DoublyList();
-
-        d1.print(); // Initially empty
-
-        d1.insertAtBeg("java");
-        d1.insertAtBeg("js");
-        d1.insertAtEnd("python");
-        d1.insertAtBeg("html");
-
-        d1.print(); // Output: html js java python
-    }
 }
