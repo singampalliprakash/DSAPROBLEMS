@@ -11,7 +11,7 @@ class CircularLinkedList {
     Node head = null;
     Node tail = null;
 
-    // Insert at beginning
+    // Insert at beginning 
     public void insertAtBeginning(int data) {
         Node newNode = new Node(data);
         if (head == null) {
